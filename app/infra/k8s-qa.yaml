@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bidone-exam
+  namespace: qa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bidone-exam
+  template:
+    metadata:
+      labels:
+        app: bidone-exam
+    spec:
+      containers:
+        - name: bidone-exam
+          image: ghcr.io/abhirehal/bidone-exam-image:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+      imagePullSecrets:
+        - name: ghcr-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bidone-exam-service
+  namespace: qa
+spec:
+  type: LoadBalancer
+  selector:
+    app: bidone-exam
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
