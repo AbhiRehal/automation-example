@@ -1,6 +1,6 @@
 name: CI/CD pipline
 
-run-name: Triggered by commit ${{ github.sha }} by @${{ github.sha }}
+run-name: Author ${{ github.actor }} commit ${{ github.sha }}
 
 on:
   push:
