@@ -57,3 +57,4 @@ jobs:
             ${{ steps.login-ecr.outputs.registry }}/bidone-exam-image:${{ github.sha }}
 
 #
+#
