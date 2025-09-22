@@ -53,8 +53,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ steps.login-ecr.outputs.registry }}/automation-example-image:latest
-            ${{ steps.login-ecr.outputs.registry }}/automation-example-image:${{ github.sha }}
+            ${{ steps.login-ecr.outputs.registry }}/automation-example/image:latest
+            ${{ steps.login-ecr.outputs.registry }}/automation-example/image:${{ github.sha }}
 
 #
 #
