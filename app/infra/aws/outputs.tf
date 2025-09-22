@@ -21,3 +21,7 @@ output "dev_namespace" {
 output "qa_namespace" {
   value = kubernetes_namespace.qa.metadata[0].name
 }
+
+output "ecr_repository_url" {
+  value = aws_ecr_repository.automation_example.repository_url
+}

@@ -22,9 +22,8 @@ variable "desired_capacity" {
   type    = number
   default = 2
 }
-#
-# variable "dockerconfigjson_base64" {
-#   description = "Base64 encoded contents of ~/.docker/config.json for GHCR"
-#   type        = string
-#   sensitive   = true
-# }
+
+variable "repository_name" {
+  type    = string
+  default = "automation-example"
+}
