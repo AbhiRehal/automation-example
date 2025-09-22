@@ -41,6 +41,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::637423660148:role/GitHubWorkflowRole
+          role-session-name: github-${{ github.run_id }}
           aws-region: ap-southeast-2
 
       - name: Log in to Amazon ECR
@@ -53,8 +54,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ steps.login-ecr.outputs.registry }}/automation-example/image:latest
-            ${{ steps.login-ecr.outputs.registry }}/automation-example/image:${{ github.sha }}
-
-#
-#
+            ${{ steps.login-ecr.outputs.registry }}/automation-example:latest
+            ${{ steps.login-ecr.outputs.registry }}/automation-example:${{ github.sha }}
