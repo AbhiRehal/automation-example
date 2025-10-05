@@ -14,8 +14,8 @@ permissions:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
     if: startsWith(github.ref_name, 'feature/')
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -40,8 +40,8 @@ jobs:
         run: npm test
 
   build-and-deploy:
-    runs-on: ubuntu-latest
     if: github.ref_name == 'develop'
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
