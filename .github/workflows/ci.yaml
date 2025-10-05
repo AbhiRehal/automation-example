@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   validate:
-    if: startsWith(github.ref_name, 'feature/')
+    if: startsWith(github.ref, 'refs/heads/feature/')
     runs-on: ubuntu-latest
 
     strategy:
@@ -39,8 +39,8 @@ jobs:
         working-directory: ./app
         run: npm test
 
-  build:
-    if: startsWith(github.ref_name, 'develop/')
+  build-and-deploy:
+    if: startsWith(github.ref, 'refs/heads/develop/')
     runs-on: ubuntu-latest
 
     strategy:
