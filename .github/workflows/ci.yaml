@@ -7,12 +7,40 @@ on:
     branches: [main, develop, "feature/**", "release/**", "hotfix/**"]
   pull_request:
     branches: [develop]
+  workflow_dispatch:
 
 permissions:
   id-token: write
 
 jobs:
+  validate:
+    if: startsWith(github.ref_name, 'feature/')
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [24.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./app
+        run: npm ci
+
+      - name: Run tests
+        working-directory: ./app
+        run: npm test
+
   build:
+    if: startsWith(github.ref_name, 'develop/')
     runs-on: ubuntu-latest
 
     strategy:
